@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *storyLabel;
 @property (weak, nonatomic) IBOutlet UIView *cellView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *storyTop;
+
 @end
 
 @implementation StoryCell
@@ -40,22 +42,20 @@
 - (void)setStory:(Story *)story {
     _story = story;
     Story *source = self.story;
-    CGRect frame = self.storyView.frame;
     if (self.story.source != nil) {
         self.typeLabel.text = [NSString stringWithFormat:@"%@ retweeted %@ ago", self.story.author.name, self.story.date.shortTimeAgoSinceNow];
         source = [[Story alloc] initWithDictionary:self.story.source];
         [self.typeView setHidden:NO];
-        frame.origin.y = 17.0f;
+        self.storyTop.constant = 17;
     } else {
         [self.typeView setHidden:YES];
-        frame.origin.y = 0.0f;
+        self.storyTop.constant = 0;
     }
     [self.posterView setImageWithURL:[NSURL URLWithString:source.author.imageUrl]];
     self.nameLabel.text = source.author.name;
     self.usernameLabel.text = [NSString stringWithFormat:@"@%@", source.author.login];
     self.storyLabel.text = source.text;
     self.dateLabel.text = source.date.shortTimeAgoSinceNow;
-    self.storyView.frame = self.contentView.frame;
 }
 
 - (IBAction)handleReply:(id)sender {

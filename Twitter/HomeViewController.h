@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Story.h"
 
 @interface HomeViewController : UIViewController
 @end

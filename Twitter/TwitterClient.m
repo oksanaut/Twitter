@@ -41,7 +41,7 @@ NSString * const kTwitterSecret = @"jasylgJXAHSbJhxY80aERfLU5dy9YRgLf8zuBbhwAw4a
         NSLog(@"Failed to get the request token %@", error);
         self.loginComplete(nil, error);
     }];
-
+    
 }
 - (void)openURL:(NSURL *)url {
     [self fetchAccessTokenWithPath:@"oauth/access_token" method:@"POST" requestToken:[BDBOAuthToken tokenWithQueryString:url.query] success:^(BDBOAuthToken *accessToken) {
@@ -61,28 +61,34 @@ NSString * const kTwitterSecret = @"jasylgJXAHSbJhxY80aERfLU5dy9YRgLf8zuBbhwAw4a
     }];
 }
 - (void)timeline:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete {
-
-        [self GET:@"1.1/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            if ([responseObject isKindOfClass:[NSArray class]]) {
-                NSArray *stories = [Story storiesWithArray:responseObject];
-                complete(stories, nil);
-            } else {
-                // TODO: learn how to generate a useful NSError
-                NSLog(@"responseObject is not NSArray");
-                complete(nil, nil);
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            complete(nil, error);
-        }];
+    
+    [self GET:@"1.1/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            NSArray *stories = [Story storiesWithArray:responseObject];
+            complete(stories, nil);
+        } else {
+            // TODO: learn how to generate a useful NSError
+            NSLog(@"responseObject is not NSArray");
+            complete(nil, nil);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        complete(nil, error);
+    }];
 }
 
-- (void)reply:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete {
+- (void)update:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete {
     
 }
-- (void)share:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete {
-    
+- (void)share:(NSString *)storyID complete:(void (^)(NSDictionary *dictionary, NSError *error))complete {
+    NSString *path = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", storyID];
+    [self GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        complete(responseObject, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        complete(nil, error);
+    }];
 }
-- (void)favorite:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete {
+
+- (void)favorite:(NSDictionary *)storyID complete:(void (^)(NSArray *stories, NSError *error))complete {
     
 }
 @end

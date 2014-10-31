@@ -7,6 +7,9 @@
 //
 
 #import "Story.h"
+#import "TwitterClient.h"
+#import "HomeViewController.h"
+
 
 @implementation Story
 - (id)initWithDictionary:(NSDictionary *)dictionary {
@@ -39,6 +42,13 @@
         [stories addObject:[[Story alloc] initWithDictionary:dictionary]];
     }
     return stories;
+}
+
+- (void)share {
+    [[TwitterClient sharedInstance] share:self.idStr complete:^(NSDictionary *dictionary, NSError *error) {
+        Story *story = [[Story alloc] initWithDictionary:dictionary];
+        
+    }];
 }
 
 @end

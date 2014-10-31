@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Person.h"
+#import "TwitterClient.h"
 
 @interface Story : NSObject
 @property (nonatomic, strong) NSString *idStr;
@@ -24,4 +25,5 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)storiesWithArray:(NSArray *)array;
 
+- (void)share;
 @end

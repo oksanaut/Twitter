@@ -15,8 +15,8 @@
 - (void)login:(void (^)(Person *person, NSError *error))complete;
 - (void)openURL:(NSURL *)url;
 - (void)timeline:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete;
-- (void)reply:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete;
-- (void)share:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete;
+- (void)update:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete;
+- (void)share:(NSString *)storyID complete:(void (^)(NSDictionary *dictionary, NSError *error))complete;
 - (void)favorite:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete;
 
 @end

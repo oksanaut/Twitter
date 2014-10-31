@@ -171,7 +171,6 @@
                             <constraint firstItem="8OS-UU-Hou" firstAttribute="leading" secondItem="rxv-Xj-pXr" secondAttribute="leading" id="QVg-qd-xYw"/>
                             <constraint firstItem="CO9-1y-Dah" firstAttribute="leading" secondItem="rxv-Xj-pXr" secondAttribute="leading" id="U3b-bA-TDZ"/>
                             <constraint firstItem="8OS-UU-Hou" firstAttribute="top" secondItem="Sch-bu-GOY" secondAttribute="bottom" constant="8" id="eUe-ye-9qU"/>
-                            <constraint firstItem="Sch-bu-GOY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rxv-Xj-pXr" secondAttribute="top" id="gyO-ej-Ve4"/>
                             <constraint firstItem="CO9-1y-Dah" firstAttribute="top" secondItem="rxv-Xj-pXr" secondAttribute="top" id="inp-Sy-xjF"/>
                             <constraint firstItem="Sch-bu-GOY" firstAttribute="top" secondItem="CO9-1y-Dah" secondAttribute="bottom" id="jPB-vt-EII"/>
                             <constraint firstAttribute="trailing" secondItem="8OS-UU-Hou" secondAttribute="trailing" id="sNp-d6-fPb"/>
@@ -193,6 +192,7 @@
                 <outlet property="nameLabel" destination="w76-0F-IUf" id="EhO-I9-ih9"/>
                 <outlet property="posterView" destination="RUX-px-nNQ" id="8hl-lT-cbX"/>
                 <outlet property="storyLabel" destination="rKV-Ue-JjV" id="9HT-Yr-HYb"/>
+                <outlet property="storyTop" destination="676-Hm-aCd" id="fB8-ID-Tfm"/>
                 <outlet property="storyView" destination="Sch-bu-GOY" id="hWz-62-wnv"/>
                 <outlet property="typeIcon" destination="Z8w-D1-37Q" id="Geu-ci-gaT"/>
                 <outlet property="typeLabel" destination="nSj-9g-gkb" id="0do-eu-5Dh"/>

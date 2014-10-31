@@ -12,17 +12,20 @@
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *stories;
+@property (strong, nonatomic) NSMutableArray *stories;
+
+- (void)addLocalStory:(Story *)story;
 
 @end
 
 @implementation HomeViewController
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self.stories = [[NSMutableArray alloc] init];
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [[TwitterClient sharedInstance] timeline:nil complete:^(NSArray *stories, NSError *error) {
             if (!error) {
-                self.stories = stories;
+                [self.stories addObjectsFromArray:stories];
                 [self.tableView reloadData];
             }
         }];
@@ -53,6 +56,11 @@
     StoryCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"storyCell"];
     cell.story = self.stories[indexPath.row];
     return cell;
+}
+
+- (void)addLocalStory:(Story *)story {
+    [self.stories insertObject:story atIndex:0];
+    [self.tableView reloadData];
 }
 /*
 #pragma mark - Navigation
