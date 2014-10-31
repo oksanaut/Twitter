@@ -7,6 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "HomeViewController.h"
+#import "LoginViewController.h"
+#import "TwitterClient.h"
+#import "Person.h"
+#import "Story.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +22,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    Person *user = [Person user];
+    if (user != nil) {
+        NSLog(@"User is logged in as %@", user.name);
+        self.window.rootViewController = [[HomeViewController alloc] init];
+    } else {
+        NSLog(@"User is not logged in");
+        self.window.rootViewController = [[LoginViewController alloc] init];
+    }
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -40,6 +56,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    [[TwitterClient sharedInstance] openURL:url];
+    return YES;
 }
 
 @end

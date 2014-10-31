@@ -1,0 +1,22 @@
+//
+//  TwitterClient.h
+//  Twitter
+//
+//  Created by Oksana Timonin on 28/10/2014.
+//  Copyright (c) 2014 oksanaut. All rights reserved.
+//
+
+#import "BDBOAuth1RequestOperationManager.h"
+#import "Person.h"
+
+@interface TwitterClient : BDBOAuth1RequestOperationManager
+
++ (TwitterClient *)sharedInstance;
+- (void)login:(void (^)(Person *person, NSError *error))complete;
+- (void)openURL:(NSURL *)url;
+- (void)timeline:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete;
+- (void)reply:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete;
+- (void)share:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete;
+- (void)favorite:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete;
+
+@end
