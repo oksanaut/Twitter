@@ -45,10 +45,29 @@
 }
 
 - (void)share {
-    [[TwitterClient sharedInstance] share:self.idStr complete:^(NSDictionary *dictionary, NSError *error) {
-        Story *story = [[Story alloc] initWithDictionary:dictionary];
-        
+    [[TwitterClient sharedInstance] share:self.idStr complete:^(Story *story, NSError *error) {
+       
+        NSLog(@"shared response story %@", story);
     }];
+}
+
+- (void)favorite {
+    [[TwitterClient sharedInstance] favorite:self.idStr complete:^(BOOL success, NSError *error) {
+        if (success) {
+            self.favorited = YES;
+            self.favorites = self.favorites + 1;
+        }
+    }];
+}
+
+- (void)reply:(NSDictionary *)dictionary {
+    // build a reply here
+    
+}
+
+- (void)create:(NSDictionary *)dictionary  {
+    // create a new element here
+    
 }
 
 @end

@@ -76,19 +76,33 @@ NSString * const kTwitterSecret = @"jasylgJXAHSbJhxY80aERfLU5dy9YRgLf8zuBbhwAw4a
     }];
 }
 
-- (void)update:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete {
-    
-}
-- (void)share:(NSString *)storyID complete:(void (^)(NSDictionary *dictionary, NSError *error))complete {
-    NSString *path = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", storyID];
-    [self GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        complete(responseObject, nil);
+- (void)create:(NSDictionary *)params complete:(void (^)(Story *story, NSError *error))complete {
+    // params should be a new story
+    [self POST:@"1.1/statuses/update/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        Story *story = [[Story alloc] initWithDictionary:responseObject];
+        complete(story, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         complete(nil, error);
     }];
 }
 
-- (void)favorite:(NSDictionary *)storyID complete:(void (^)(NSArray *stories, NSError *error))complete {
-    
+- (void)share:(NSString *)storyID complete:(void (^)(Story *story, NSError *error))complete {
+    NSString *path = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", storyID];
+    [self POST:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        Story *story = [[Story alloc] initWithDictionary:responseObject];
+        complete(story, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        complete(nil, error);
+    }];
+}
+
+- (void)favorite:(NSString *)storyID complete:(void (^)(BOOL success, NSError *error))complete {
+    NSString *path = [NSString stringWithFormat:@"1.1/favorites/create.json?id=%@", storyID];
+    [self POST:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseobject for favorite: %@", responseObject);
+        complete(YES, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        complete(NO, error);
+    }];
 }
 @end

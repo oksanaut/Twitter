@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ComposerViewController">
+            <connections>
+                <outlet property="textInput" destination="fJ2-Za-xPB" id="Xoh-We-l3u"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" adjustsFontSizeToFit="NO" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="fJ2-Za-xPB">
+                    <rect key="frame" x="8" y="80" width="584" height="512"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="handleChange:" destination="-1" eventType="valueChanged" id="Nib-c4-YMa"/>
+                    </connections>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fJ2-Za-xPB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="80" id="2md-78-1mi"/>
+                <constraint firstItem="fJ2-Za-xPB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="70m-Kf-AUY"/>
+                <constraint firstAttribute="bottom" secondItem="fJ2-Za-xPB" secondAttribute="bottom" constant="8" id="Oud-tB-s56"/>
+                <constraint firstItem="fJ2-Za-xPB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="eYQ-hC-oSh"/>
+                <constraint firstAttribute="trailing" secondItem="fJ2-Za-xPB" secondAttribute="trailing" constant="8" id="rOi-my-Zaf"/>
+                <constraint firstItem="fJ2-Za-xPB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="ykc-Pl-ljS"/>
+                <constraint firstAttribute="trailing" secondItem="fJ2-Za-xPB" secondAttribute="trailing" constant="8" id="yxS-1B-FGf"/>
+                <constraint firstAttribute="bottom" secondItem="fJ2-Za-xPB" secondAttribute="bottom" constant="8" id="zBh-NX-XvX"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="70m-Kf-AUY"/>
+                    <exclude reference="Oud-tB-s56"/>
+                    <exclude reference="rOi-my-Zaf"/>
+                    <exclude reference="ykc-Pl-ljS"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="139" y="154"/>
+        </view>
+    </objects>
+</document>

@@ -17,17 +17,17 @@
                         <rect key="frame" x="8" y="8" width="304" height="102"/>
                         <subviews>
                             <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="304" placeholderIntrinsicHeight="infinite" translatesAutoresizingMaskIntoConstraints="NO" id="CO9-1y-Dah" userLabel="Story Type">
-                                <rect key="frame" x="0.0" y="0.0" width="304" height="17"/>
+                                <rect key="frame" x="0.0" y="0.0" width="304" height="19"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z8w-D1-37Q">
-                                        <rect key="frame" x="37" y="0.0" width="11" height="11"/>
+                                        <rect key="frame" x="37" y="1" width="11" height="11"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="11" id="MhP-SU-Pfo"/>
                                             <constraint firstAttribute="width" constant="11" id="Omn-bE-DaT"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="story type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSj-9g-gkb">
-                                        <rect key="frame" x="56" y="-1" width="52" height="14"/>
+                                        <rect key="frame" x="56" y="0.0" width="52" height="14"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -36,14 +36,19 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Z8w-D1-37Q" firstAttribute="centerY" secondItem="nSj-9g-gkb" secondAttribute="centerY" id="B8o-o2-nML"/>
+                                    <constraint firstAttribute="bottom" secondItem="nSj-9g-gkb" secondAttribute="bottom" constant="8" id="Gme-XH-pza"/>
+                                    <constraint firstItem="nSj-9g-gkb" firstAttribute="top" secondItem="CO9-1y-Dah" secondAttribute="top" id="NGQ-dq-4kd"/>
                                     <constraint firstItem="Z8w-D1-37Q" firstAttribute="leading" secondItem="CO9-1y-Dah" secondAttribute="leading" constant="37" id="WFL-hC-0xV"/>
-                                    <constraint firstAttribute="bottom" secondItem="Z8w-D1-37Q" secondAttribute="bottom" constant="6" id="ZF1-M0-T4Y"/>
                                     <constraint firstItem="nSj-9g-gkb" firstAttribute="leading" secondItem="Z8w-D1-37Q" secondAttribute="trailing" constant="8" id="exp-qW-P3F"/>
-                                    <constraint firstItem="Z8w-D1-37Q" firstAttribute="top" secondItem="CO9-1y-Dah" secondAttribute="top" id="yLu-yG-xTk"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Gme-XH-pza"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="Sch-bu-GOY" userLabel="Content">
-                                <rect key="frame" x="0.0" y="17" width="304" height="55"/>
+                                <rect key="frame" x="0.0" y="19" width="304" height="53"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RUX-px-nNQ">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
@@ -165,7 +170,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Sch-bu-GOY" firstAttribute="top" secondItem="rxv-Xj-pXr" secondAttribute="top" constant="17" id="676-Hm-aCd"/>
+                            <constraint firstItem="Sch-bu-GOY" firstAttribute="top" secondItem="rxv-Xj-pXr" secondAttribute="top" constant="19" id="676-Hm-aCd"/>
                             <constraint firstItem="Sch-bu-GOY" firstAttribute="leading" secondItem="rxv-Xj-pXr" secondAttribute="leading" id="DwX-G0-4YZ"/>
                             <constraint firstAttribute="trailing" secondItem="CO9-1y-Dah" secondAttribute="trailing" id="HD7-2G-FGX"/>
                             <constraint firstItem="8OS-UU-Hou" firstAttribute="leading" secondItem="rxv-Xj-pXr" secondAttribute="leading" id="QVg-qd-xYw"/>
@@ -199,7 +204,7 @@
                 <outlet property="typeView" destination="CO9-1y-Dah" id="yV6-ea-mHc"/>
                 <outlet property="usernameLabel" destination="4Yj-s7-0Qd" id="Phi-vZ-DfF"/>
             </connections>
-            <point key="canvasLocation" x="140" y="326.5"/>
+            <point key="canvasLocation" x="140" y="322.5"/>
         </tableViewCell>
     </objects>
     <resources>

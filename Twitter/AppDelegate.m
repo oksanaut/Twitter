@@ -23,15 +23,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
+    
     Person *user = [Person user];
     if (user != nil) {
         NSLog(@"User is logged in as %@", user.name);
-        self.window.rootViewController = [[HomeViewController alloc] init];
+        HomeViewController *vc = [[HomeViewController alloc] init];
+        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+        self.window.rootViewController = nvc;
     } else {
         NSLog(@"User is not logged in");
-        self.window.rootViewController = [[LoginViewController alloc] init];
+        LoginViewController *vc = [[LoginViewController alloc] init];
+        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+        self.window.rootViewController = nvc;
     }
+    
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

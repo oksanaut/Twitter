@@ -26,4 +26,8 @@
 + (NSArray *)storiesWithArray:(NSArray *)array;
 
 - (void)share;
+- (void)favorite;
+- (void)create:(NSDictionary *)dictionary;
+- (void)reply:(NSDictionary *)dictionary;
+
 @end

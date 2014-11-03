@@ -8,6 +8,8 @@
 
 #import "StoryCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "HomeViewController.h"
+#import "ComposerViewController.h"
 #import "NSDate+DateTools.h"
 
 @interface StoryCell ()
@@ -46,7 +48,7 @@
         self.typeLabel.text = [NSString stringWithFormat:@"%@ retweeted %@ ago", self.story.author.name, self.story.date.shortTimeAgoSinceNow];
         source = [[Story alloc] initWithDictionary:self.story.source];
         [self.typeView setHidden:NO];
-        self.storyTop.constant = 17;
+        self.storyTop.constant = 19;
     } else {
         [self.typeView setHidden:YES];
         self.storyTop.constant = 0;
@@ -59,12 +61,15 @@
 }
 
 - (IBAction)handleReply:(id)sender {
+    [self.delegate storyCell:self onReply:self.story];
 }
 
 - (IBAction)handleShare:(id)sender {
+    [self.story share];
 }
 
 - (IBAction)handleFavorite:(id)sender {
+    [self.story favorite];
 }
 
 @end

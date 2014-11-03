@@ -10,4 +10,5 @@
 #import "Story.h"
 
 @interface HomeViewController : UIViewController
+- (void)addLocalStory:(Story *)story;
 @end
