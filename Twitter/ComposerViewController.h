@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Story.h"
 
 @interface ComposerViewController : UIViewController
-- (id)initWithTarget:(NSString *)target;
+- (id)initWithStory:(Story *)story;
 @end

@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "ComposerViewController.h"
 #import "StoryCell.h"
+#import "Person.h"
 #import "TwitterClient.h"
 
 @interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, StoryCellDelegate>
@@ -45,7 +46,9 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(onRefresh) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-    
+
+    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(handleLogout)];
+    self.navigationItem.leftBarButtonItem = logoutButton;
     UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStylePlain target:self action:@selector(onCreate)];
     self.navigationItem.rightBarButtonItem = updateButton;
 }
@@ -73,6 +76,10 @@
     [self.tableView reloadData];
 }
 
+- (void)handleLogout {
+    
+}
+
 
 - (void)storyCell:(StoryCell *)viewController onCreate:(Story *)story {
     ComposerViewController *vc = [[ComposerViewController alloc] init];
@@ -82,7 +89,7 @@
 }
 
 - (void)storyCell:(StoryCell *)viewController onReply:(Story *)story {
-    ComposerViewController *vc = [[ComposerViewController alloc] initWithTarget:story.author.login];
+    ComposerViewController *vc = [[ComposerViewController alloc] initWithStory:story];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nvc animated:YES completion: nil];
 }

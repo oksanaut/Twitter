@@ -32,6 +32,7 @@ NSString * const kUserKey = @"kUserKey";
     }
     return _user;
 }
+
 + (void)setUser:(Person *)person {
     _user = person;
     if (_user != nil) {

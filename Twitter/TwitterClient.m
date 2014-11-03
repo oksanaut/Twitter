@@ -78,7 +78,9 @@ NSString * const kTwitterSecret = @"jasylgJXAHSbJhxY80aERfLU5dy9YRgLf8zuBbhwAw4a
 
 - (void)create:(NSDictionary *)params complete:(void (^)(Story *story, NSError *error))complete {
     // params should be a new story
-    [self POST:@"1.1/statuses/update/" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:params];
+    NSString *parameters = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [self POST:@"1.1/statuses/update.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         Story *story = [[Story alloc] initWithDictionary:responseObject];
         complete(story, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

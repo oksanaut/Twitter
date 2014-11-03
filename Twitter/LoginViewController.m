@@ -24,6 +24,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)handleLogin:(id)sender {
     [[TwitterClient sharedInstance] login:^(Person *person, NSError *error) {
         if (person != nil) {

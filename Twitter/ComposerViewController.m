@@ -7,17 +7,17 @@
 //
 
 #import "ComposerViewController.h"
+#import "TwitterClient.h"
 
 @interface ComposerViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *textInput;
-@property (weak, nonatomic) NSString *target;
-
+@property (weak, nonatomic) Story *story;
 @end
 
 @implementation ComposerViewController
-- (id)initWithTarget:(NSString *)target {
+- (id)initWithStory:(Story *)story {
     if (self = [super init]) {
-        self.target = target;
+        self.story = story;
     }
     return self;
 }
@@ -26,9 +26,9 @@
     [super viewDidLoad];
     self.title = @"Create New";
     NSString *buttonTitle = @"Tweet";
-    if (self.target != nil) {
+    if (self.story != nil) {
         buttonTitle = @"Reply";
-        self.textInput.text = [NSString stringWithFormat:@"@%@", self.target];
+        self.textInput.text = [NSString stringWithFormat:@"@%@", self.story.author.login];
     }
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(handleCancel)];
     UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithTitle:buttonTitle style:UIBarButtonItemStylePlain target:self action:@selector(handleUpdate)];
@@ -43,8 +43,8 @@
 
 - (IBAction)handleChange:(id)sender {
     NSString *text = self.textInput.text;
-    if (self.target != nil) {
-        NSRange range = [text rangeOfString:[NSString stringWithFormat:@"@%@", self.target]];
+    if (self.story != nil) {
+        NSRange range = [text rangeOfString:[NSString stringWithFormat:@"@%@", self.story.author.login]];
         if (range.location != NSNotFound) {
             self.navigationItem.rightBarButtonItem.title = @"Reply";
         } else {
@@ -58,7 +58,18 @@
 }
 
 - (void)handleUpdate {
-    [self dismissViewControllerAnimated:true completion:nil];
+    NSMutableDictionary *story = [[NSMutableDictionary alloc] init];
+    [story setValue:self.textInput.text forKey:@"status"];
+    [story setValue:self.story.idStr forKey:@"in_reply_to_status_id"];
+    [[TwitterClient sharedInstance] create:story complete:^(Story *story, NSError *error) {
+        if (!error) {
+            NSLog(@"success");
+            [self dismissViewControllerAnimated:true completion:nil];
+        } else {
+            NSLog(@"success %@", error);
+        }
+    }];
+    
 }
 
 /*
