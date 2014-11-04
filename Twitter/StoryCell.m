@@ -31,7 +31,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.posterView.layer.cornerRadius = 3.0;
+    self.posterView.layer.cornerRadius = 6.0;
 
 }
 
@@ -45,7 +45,7 @@
     _story = story;
     Story *source = self.story;
     if (self.story.source != nil) {
-        self.typeLabel.text = [NSString stringWithFormat:@"%@ retweeted %@ ago", self.story.author.name, self.story.date.shortTimeAgoSinceNow];
+        self.typeLabel.text = [NSString stringWithFormat:@"%@ retweeted this %@ ago", self.story.author.name, self.story.date.shortTimeAgoSinceNow];
         source = [[Story alloc] initWithDictionary:self.story.source];
         [self.typeView setHidden:NO];
         self.storyTop.constant = 19;
@@ -56,8 +56,20 @@
     [self.posterView setImageWithURL:[NSURL URLWithString:source.author.imageUrl]];
     self.nameLabel.text = source.author.name;
     self.usernameLabel.text = [NSString stringWithFormat:@"@%@", source.author.login];
-    self.storyLabel.text = source.text;
-    self.dateLabel.text = source.date.shortTimeAgoSinceNow;
+    self.storyLabel.text = [NSString stringWithFormat:@"%@ ", source.text];
+    self.storyLabel.preferredMaxLayoutWidth = self.storyLabel.frame.size.width;
+    self.dateLabel.text = [NSString stringWithFormat:@"%@ ago", source.date.shortTimeAgoSinceNow];
+    
+    [self.shareButton setTitle:[NSString stringWithFormat: @" %ld", self.story.shares] forState:UIControlStateNormal];
+    [self.favoriteButton setTitle:[NSString stringWithFormat: @" %ld", self.story.favorites] forState:UIControlStateNormal];
+    [self.favoriteButton setSelected:self.story.favorited];
+    [self.shareButton setSelected:self.story.shared];
+}
+
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.storyLabel.preferredMaxLayoutWidth = self.storyLabel.frame.size.width;
 }
 
 - (IBAction)handleReply:(id)sender {
@@ -65,11 +77,18 @@
 }
 
 - (IBAction)handleShare:(id)sender {
-    [self.story share];
+    [self.story share:^(BOOL success, NSError *error) {
+        if (success) {
+            [self.shareButton setTitle:[NSString stringWithFormat: @" %ld", self.story.shares] forState:UIControlStateNormal];
+            [self.shareButton setSelected:self.story.shared];
+        }
+    }];
 }
 
 - (IBAction)handleFavorite:(id)sender {
     [self.story favorite];
+    [self.favoriteButton setTitle:[NSString stringWithFormat: @" %ld", self.story.favorites] forState:UIControlStateNormal];
+    [self.favoriteButton setSelected:self.story.favorited];
 }
 
 @end

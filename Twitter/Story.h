@@ -10,24 +10,27 @@
 #import "Person.h"
 #import "TwitterClient.h"
 
+extern NSString * const StoryAddedNotification;
+
 @interface Story : NSObject
 @property (nonatomic, strong) NSString *idStr;
 @property (nonatomic, strong) Person *author;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, assign) BOOL favorited;
 @property (nonatomic, assign) NSInteger favorites;
-@property (nonatomic, assign) NSInteger retweets;
+@property (nonatomic, assign) NSInteger shares;
+@property (nonatomic, assign) BOOL shared;
+
 @property (nonatomic, strong) NSDictionary *source;
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) NSString *type;
 
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
 + (NSArray *)storiesWithArray:(NSArray *)array;
-
-- (void)share;
++ (void)create:(NSString *)status complete:(void (^)(BOOL success, NSError *error))complete;
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 - (void)favorite;
-- (void)create:(NSDictionary *)dictionary;
-- (void)reply:(NSDictionary *)dictionary;
+- (void)reply:(NSString *)status complete:(void (^)(BOOL success, NSError *error))complete;
+- (void)share:(void (^)(BOOL success, NSError *error))complete;
 
 @end

@@ -8,10 +8,15 @@
 
 #import "ComposerViewController.h"
 #import "TwitterClient.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ComposerViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *textInput;
+@property (weak, nonatomic) IBOutlet UIImageView *authorView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *loginLabel;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) Story *story;
+@property (weak, nonatomic) Person *person;
 @end
 
 @implementation ComposerViewController
@@ -28,12 +33,21 @@
     NSString *buttonTitle = @"Tweet";
     if (self.story != nil) {
         buttonTitle = @"Reply";
-        self.textInput.text = [NSString stringWithFormat:@"@%@", self.story.author.login];
+        self.textView.text = [NSString stringWithFormat:@"@%@ ", self.story.author.login];
+    } else {
+        self.textView.text = @"";
     }
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(handleCancel)];
     UIBarButtonItem *updateButton = [[UIBarButtonItem alloc] initWithTitle:buttonTitle style:UIBarButtonItemStylePlain target:self action:@selector(handleUpdate)];
     self.navigationItem.leftBarButtonItem = cancelButton;
     self.navigationItem.rightBarButtonItem = updateButton;
+    
+    self.nameLabel.text = [Person user].name;
+    self.loginLabel.text = [NSString stringWithFormat:@"@%@", [Person user].login];
+    [self.authorView setImageWithURL:[NSURL URLWithString:[Person user].imageUrl]];
+    self.authorView.layer.cornerRadius = 6.0;
+    
+    [self.textView becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,7 +56,7 @@
 }
 
 - (IBAction)handleChange:(id)sender {
-    NSString *text = self.textInput.text;
+    NSString *text = self.textView.text;
     if (self.story != nil) {
         NSRange range = [text rangeOfString:[NSString stringWithFormat:@"@%@", self.story.author.login]];
         if (range.location != NSNotFound) {
@@ -58,18 +72,28 @@
 }
 
 - (void)handleUpdate {
-    NSMutableDictionary *story = [[NSMutableDictionary alloc] init];
-    [story setValue:self.textInput.text forKey:@"status"];
-    [story setValue:self.story.idStr forKey:@"in_reply_to_status_id"];
-    [[TwitterClient sharedInstance] create:story complete:^(Story *story, NSError *error) {
-        if (!error) {
+    NSString *status = self.textView.text;
+    if (self.story != nil) {
+    [self.story reply:status complete:^(BOOL success, NSError *error) {
+        if (success) {
             NSLog(@"success");
             [self dismissViewControllerAnimated:true completion:nil];
         } else {
             NSLog(@"success %@", error);
+            [self dismissViewControllerAnimated:true completion:nil];
         }
     }];
-    
+    } else {
+        [Story create:status complete:^(BOOL success, NSError *error){
+            if (success) {
+                NSLog(@"success");
+                [self dismissViewControllerAnimated:true completion:nil];
+            } else {
+                NSLog(@"success %@", error);
+                [self dismissViewControllerAnimated:true completion:nil];
+            }
+        }];
+    }
 }
 
 /*

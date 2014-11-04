@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "TwitterClient.h"
+#import "HomeViewController.h"
 
 @interface LoginViewController ()
 
@@ -28,9 +29,12 @@
 - (IBAction)handleLogin:(id)sender {
     [[TwitterClient sharedInstance] login:^(Person *person, NSError *error) {
         if (person != nil) {
-            NSLog(@"Welcome %@", person);
+            HomeViewController *vc = [[HomeViewController alloc] init];
+            UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+            [self presentViewController:nvc animated:YES completion:nil];
         } else {
-            // persent error
+            NSLog(@"Login error");
+
         }
     }];
 }

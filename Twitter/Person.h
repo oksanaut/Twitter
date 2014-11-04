@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+extern NSString * const UserAddedNotification;
+extern NSString * const UserRemovedNotification;
 
 @interface Person : NSObject
 @property (nonatomic, strong) NSDictionary *data;
@@ -19,5 +21,6 @@
 
 + (Person *)user;
 + (void)setUser:(Person *)person;
++ (void)logout;
 
 @end

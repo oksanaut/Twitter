@@ -8,11 +8,12 @@
 
 #import "HomeViewController.h"
 #import "ComposerViewController.h"
+#import "StoryViewController.h"
 #import "StoryCell.h"
 #import "Person.h"
 #import "TwitterClient.h"
 
-@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, StoryCellDelegate>
+@interface HomeViewController () <UITableViewDataSource, UITableViewDelegate, StoryCellDelegate, StoryViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *stories;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
@@ -36,7 +37,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:StoryAddedNotification object:nil queue:NSOperationQueuePriorityNormal usingBlock:^(NSNotification *note) {
+            [self addLocalStory: note.userInfo[@"story"]];
+    }];
+    
+    self.title = @"Home";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"StoryCell" bundle:nil] forCellReuseIdentifier:@"storyCell"];
@@ -69,17 +75,24 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    StoryViewController *svc = [[StoryViewController alloc] init];
+    svc.story = self.stories[indexPath.row];
+    svc.delegate = self;
+    [self.navigationController pushViewController:svc animated:YES];
+    
+}
+
 - (void)onCreate {
     ComposerViewController *vc = [[ComposerViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nvc animated:YES completion: nil];
-    [self.tableView reloadData];
 }
 
 - (void)handleLogout {
-    
+    [Person logout];
 }
-
 
 - (void)storyCell:(StoryCell *)viewController onCreate:(Story *)story {
     ComposerViewController *vc = [[ComposerViewController alloc] init];
@@ -102,7 +115,7 @@
 - (void)onRefresh {
     [[TwitterClient sharedInstance] timeline:nil complete:^(NSArray *stories, NSError *error) {
         if (!error) {
-            self.stories = [stories copy];
+            self.stories = [[NSMutableArray alloc] initWithArray:stories];
             [self.refreshControl endRefreshing];
             [self.tableView reloadData];
         }

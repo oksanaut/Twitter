@@ -61,7 +61,6 @@ NSString * const kTwitterSecret = @"jasylgJXAHSbJhxY80aERfLU5dy9YRgLf8zuBbhwAw4a
     }];
 }
 - (void)timeline:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete {
-    
     [self GET:@"1.1/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSArray class]]) {
             NSArray *stories = [Story storiesWithArray:responseObject];
@@ -77,10 +76,7 @@ NSString * const kTwitterSecret = @"jasylgJXAHSbJhxY80aERfLU5dy9YRgLf8zuBbhwAw4a
 }
 
 - (void)create:(NSDictionary *)params complete:(void (^)(Story *story, NSError *error))complete {
-    // params should be a new story
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:params];
-    NSString *parameters = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    [self POST:@"1.1/statuses/update.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self POST:@"1.1/statuses/update.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         Story *story = [[Story alloc] initWithDictionary:responseObject];
         complete(story, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -101,7 +97,15 @@ NSString * const kTwitterSecret = @"jasylgJXAHSbJhxY80aERfLU5dy9YRgLf8zuBbhwAw4a
 - (void)favorite:(NSString *)storyID complete:(void (^)(BOOL success, NSError *error))complete {
     NSString *path = [NSString stringWithFormat:@"1.1/favorites/create.json?id=%@", storyID];
     [self POST:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"responseobject for favorite: %@", responseObject);
+        complete(YES, nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        complete(NO, error);
+    }];
+}
+
+- (void)unfavorite:(NSString *)storyID complete:(void (^)(BOOL success, NSError *error))complete {
+    NSString *path = [NSString stringWithFormat:@"1.1/favorites/destroy.json?id=%@", storyID];
+    [self POST:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         complete(YES, nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         complete(NO, error);

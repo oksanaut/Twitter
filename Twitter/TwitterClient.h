@@ -20,5 +20,5 @@
 - (void)create:(NSDictionary *)params complete:(void (^)(Story *story, NSError *error))complete;
 - (void)share:(NSString *)storyID complete:(void (^)(Story *story, NSError *error))complete;
 - (void)favorite:(NSString *)storyID complete:(void (^)(BOOL success, NSError *error))complete;
-
+- (void)unfavorite:(NSString *)storyID complete:(void (^)(BOOL success, NSError *error))complete;
 @end

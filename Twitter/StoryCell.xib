@@ -48,7 +48,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="Sch-bu-GOY" userLabel="Content">
-                                <rect key="frame" x="0.0" y="19" width="304" height="53"/>
+                                <rect key="frame" x="0.0" y="19" width="304" height="59"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RUX-px-nNQ">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
@@ -64,7 +64,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="255" horizontalCompressionResistancePriority="753" verticalCompressionResistancePriority="755" text="Text" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKV-Ue-JjV">
-                                        <rect key="frame" x="56" y="22" width="25" height="16"/>
+                                        <rect key="frame" x="56" y="22" width="248" height="16"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="248" id="121-Fk-od2"/>
                                         </constraints>
@@ -92,7 +92,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rKV-Ue-JjV" secondAttribute="trailing" id="02A-pi-vOS"/>
+                                    <constraint firstAttribute="trailing" secondItem="rKV-Ue-JjV" secondAttribute="trailing" id="02A-pi-vOS"/>
                                     <constraint firstItem="9UI-bX-aMB" firstAttribute="top" secondItem="Sch-bu-GOY" secondAttribute="top" id="8Df-zw-dT0"/>
                                     <constraint firstItem="RUX-px-nNQ" firstAttribute="top" secondItem="Sch-bu-GOY" secondAttribute="top" id="CAy-vL-DJg"/>
                                     <constraint firstItem="9UI-bX-aMB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4Yj-s7-0Qd" secondAttribute="trailing" constant="6" id="CgA-N6-dMm"/>
@@ -111,13 +111,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8OS-UU-Hou" userLabel="Actions">
-                                <rect key="frame" x="0.0" y="80" width="304" height="22"/>
+                                <rect key="frame" x="0.0" y="86" width="304" height="16"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weP-hT-bSo">
-                                        <rect key="frame" x="96" y="0.0" width="35" height="22"/>
+                                        <rect key="frame" x="96" y="0.0" width="35" height="16"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                         <state key="normal" image="retweet.png">
-                                            <color key="titleColor" red="0.4941176471" green="0.59999999999999998" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.53333333329999999" green="0.59999999999999998" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="selected" image="retweet_on.png"/>
@@ -127,9 +128,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7XM-sz-c4V">
-                                        <rect key="frame" x="139" y="0.0" width="32" height="22"/>
+                                        <rect key="frame" x="139" y="0.0" width="32" height="16"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                         <state key="normal" image="favorite.png">
+                                            <color key="titleColor" red="0.53333333329999999" green="0.59999999999999998" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="selected" image="favorite_on.png"/>
@@ -139,11 +142,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZuC-ek-ev9">
-                                        <rect key="frame" x="56" y="0.0" width="32" height="22"/>
+                                        <rect key="frame" x="56" y="0.0" width="32" height="16"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                         <state key="normal" image="reply.png">
-                                            <color key="titleColor" red="0.49411764705882355" green="0.59999999999999998" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.53333333329999999" green="0.59999999999999998" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="selected" title="reply" image="reply_hover.png">
                                             <color key="titleColor" red="0.80000000000000004" green="0.83921568627450982" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
@@ -194,8 +197,11 @@
             <connections>
                 <outlet property="cellView" destination="rxv-Xj-pXr" id="ucc-6V-aNU"/>
                 <outlet property="dateLabel" destination="9UI-bX-aMB" id="0Sm-cQ-8oR"/>
+                <outlet property="favoriteButton" destination="7XM-sz-c4V" id="iW8-6y-W0g"/>
                 <outlet property="nameLabel" destination="w76-0F-IUf" id="EhO-I9-ih9"/>
                 <outlet property="posterView" destination="RUX-px-nNQ" id="8hl-lT-cbX"/>
+                <outlet property="replyButton" destination="ZuC-ek-ev9" id="UM1-fd-mh4"/>
+                <outlet property="shareButton" destination="weP-hT-bSo" id="yaA-9p-qJd"/>
                 <outlet property="storyLabel" destination="rKV-Ue-JjV" id="9HT-Yr-HYb"/>
                 <outlet property="storyTop" destination="676-Hm-aCd" id="fB8-ID-Tfm"/>
                 <outlet property="storyView" destination="Sch-bu-GOY" id="hWz-62-wnv"/>

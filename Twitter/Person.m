@@ -7,6 +7,11 @@
 //
 
 #import "Person.h"
+#import "TwitterClient.h"
+
+NSString * const UserAddedNotification = @"UserAddedNotification";
+NSString * const UserRemovedNotification = @"UserRemovedNotification";
+
 @implementation Person
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if (self = [super init]) {
@@ -41,5 +46,23 @@ NSString * const kUserKey = @"kUserKey";
     } else {
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:kUserKey];
     }
+    
+}
+
++ (void)logout {
+    [Person setUser:nil];
+    [[TwitterClient sharedInstance].requestSerializer removeAccessToken];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UserRemovedNotification object:nil];
+}
+
++ (void)login {
+    [[TwitterClient sharedInstance] login:^(Person *person, NSError *error) {
+        if (person != nil) {
+            [Person setUser:person];
+            [[NSNotificationCenter defaultCenter] postNotificationName:UserRemovedNotification object:nil];
+        } else {
+            NSLog(@"%@", error);
+        }
+    }];
 }
 @end

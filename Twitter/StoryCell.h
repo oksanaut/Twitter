@@ -19,6 +19,9 @@
 @interface StoryCell : UITableViewCell
 @property (nonatomic, strong) Story *story;
 @property (nonatomic, weak) id<StoryCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIButton *replyButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 
 - (IBAction)handleReply:(id)sender;
 - (IBAction)handleShare:(id)sender;

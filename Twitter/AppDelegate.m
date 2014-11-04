@@ -23,6 +23,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLogin) name:UserAddedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLogout) name:UserRemovedNotification object:nil];
     
     Person *user = [Person user];
     if (user != nil) {
@@ -32,11 +34,9 @@
         self.window.rootViewController = nvc;
     } else {
         NSLog(@"User is not logged in");
-        LoginViewController *vc = [[LoginViewController alloc] init];
-        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
-        self.window.rootViewController = nvc;
+        LoginViewController *lvc = [[LoginViewController alloc] init];
+        self.window.rootViewController = lvc;
     }
-    
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -67,6 +67,18 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     [[TwitterClient sharedInstance] openURL:url];
     return YES;
+}
+
+- (void)handleLogin {
+    HomeViewController *vc = [[HomeViewController alloc] init];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = nvc;
+}
+
+- (void)handleLogout {
+    NSLog(@"User is not logged in");
+    LoginViewController *lvc = [[LoginViewController alloc] init];
+    self.window.rootViewController = lvc;
 }
 
 @end
