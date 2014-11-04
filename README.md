@@ -26,8 +26,8 @@ Time spent: 18
 - [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 
 ### Walkthrough
-![walkthrough](https://raw.githubusercontent.com/oksanaut/Twitter/8ea64797cabdc4723a50c8a6abaea8bd0d0e704e/walkthrough.gif)
-
+![walkthrough](https://raw.githubusercontent.com/oksanaut/Twitter/master/walkthrough.gif)
+![walkthrough](https://raw.githubusercontent.com/oksanaut/Twitter/master/walkthrough3.gif)
 
 
 ##Twitter Redux
@@ -59,3 +59,5 @@ Time spent: ___
   - [ ] Tap account to switch to
   - [ ] Include a plus button to Add an Account
   - [ ] Swipe to delete an account
+
+### Walkthrough
