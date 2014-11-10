@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Story.h"
 
-@interface ComposerViewController : UIViewController
+@interface ComposerViewController : UIViewController <UITextViewDelegate>
 - (id)initWithStory:(Story *)story;
 @end

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "HomeViewController.h"
 #import "LoginViewController.h"
+#import "NavigationViewController.h"
 #import "TwitterClient.h"
 #import "Person.h"
 #import "Story.h"
@@ -29,9 +30,12 @@
     Person *user = [Person user];
     if (user != nil) {
         NSLog(@"User is logged in as %@", user.name);
-        HomeViewController *vc = [[HomeViewController alloc] init];
+        NavigationViewController *vc = [[NavigationViewController alloc] init];
         UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
         self.window.rootViewController = nvc;
+//        HomeViewController *vc = [[HomeViewController alloc] init];
+//        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+//        self.window.rootViewController = nvc;
     } else {
         NSLog(@"User is not logged in");
         LoginViewController *lvc = [[LoginViewController alloc] init];

@@ -29,6 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setEdgesForExtendedLayout:UIRectEdgeNone];
     self.title = @"Create New";
     NSString *buttonTitle = @"Tweet";
     if (self.story != nil) {
@@ -46,7 +47,7 @@
     self.loginLabel.text = [NSString stringWithFormat:@"@%@", [Person user].login];
     [self.authorView setImageWithURL:[NSURL URLWithString:[Person user].imageUrl]];
     self.authorView.layer.cornerRadius = 6.0;
-    
+    self.textView.delegate = self;
     [self.textView becomeFirstResponder];
 }
 
@@ -55,8 +56,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)handleChange:(id)sender {
-    NSString *text = self.textView.text;
+- (void)textViewDidChange:(UITextView *)textView {
+    NSString *text = textView.text;
+    long numCharsLeft = 140 - text.length;
     if (self.story != nil) {
         NSRange range = [text rangeOfString:[NSString stringWithFormat:@"@%@", self.story.author.login]];
         if (range.location != NSNotFound) {
@@ -64,6 +66,11 @@
         } else {
             self.navigationItem.rightBarButtonItem.title = @"Tweet";
         }
+    }
+    if (numCharsLeft < 0 || numCharsLeft == 140) {
+        self.navigationItem.rightBarButtonItem.enabled = NO;
+    } else {
+        self.navigationItem.rightBarButtonItem.enabled = YES;
     }
 }
 

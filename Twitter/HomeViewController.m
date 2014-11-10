@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "ComposerViewController.h"
 #import "StoryViewController.h"
+#import "ProfileViewController.h"
 #import "StoryCell.h"
 #import "Person.h"
 #import "TwitterClient.h"
@@ -34,6 +35,7 @@
     }
     return self;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -78,7 +80,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     StoryViewController *svc = [[StoryViewController alloc] init];
-    svc.story = self.stories[indexPath.row];
+    Story *story = (Story *)self.stories[indexPath.row];
+    if (story.source != nil) {
+        Story *source = [[Story alloc] initWithDictionary:story.source];
+        svc.story = source;
+    } else {
+        svc.story = story;
+    }
     svc.delegate = self;
     [self.navigationController pushViewController:svc animated:YES];
     
@@ -98,13 +106,18 @@
     ComposerViewController *vc = [[ComposerViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nvc animated:YES completion: nil];
-    [self.tableView reloadData];
 }
 
 - (void)storyCell:(StoryCell *)viewController onReply:(Story *)story {
     ComposerViewController *vc = [[ComposerViewController alloc] initWithStory:story];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nvc animated:YES completion: nil];
+}
+
+- (void)storyCell:(StoryCell *)viewController onProfile:(Person *)person {
+    ProfileViewController *vc = [[ProfileViewController alloc] init];
+    vc.person = person;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)addLocalStory:(Story *)story {

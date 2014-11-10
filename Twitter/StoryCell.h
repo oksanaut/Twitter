@@ -8,22 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "Story.h"
+#import "Person.h"
 
 @class StoryCell;
 
 @protocol StoryCellDelegate <NSObject>
 - (void)storyCell:(StoryCell *)viewController onCreate:(Story *)story;
 - (void)storyCell:(StoryCell *)viewController onReply:(Story *)story;
+- (void)storyCell:(StoryCell *)viewController onProfile:(Person *)person;
 @end
 
 @interface StoryCell : UITableViewCell
 @property (nonatomic, strong) Story *story;
 @property (nonatomic, weak) id<StoryCellDelegate> delegate;
-@property (weak, nonatomic) IBOutlet UIButton *replyButton;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
-@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
 
-- (IBAction)handleReply:(id)sender;
-- (IBAction)handleShare:(id)sender;
-- (IBAction)handleFavorite:(id)sender;
+
 @end

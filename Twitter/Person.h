@@ -15,6 +15,8 @@ extern NSString * const UserRemovedNotification;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *login;
 @property (nonatomic, strong) NSString *imageUrl;
+@property (nonatomic, strong) NSString *bannerUrl;
+@property (nonatomic, strong) NSString *color;
 @property (nonatomic, strong) NSString *tagline;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;

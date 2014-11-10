@@ -27,7 +27,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="story type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSj-9g-gkb">
-                                        <rect key="frame" x="56" y="0.0" width="52" height="14"/>
+                                        <rect key="frame" x="56" y="0.0" width="52" height="13.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -48,10 +48,11 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" verticalCompressionResistancePriority="752" translatesAutoresizingMaskIntoConstraints="NO" id="Sch-bu-GOY" userLabel="Content">
-                                <rect key="frame" x="0.0" y="19" width="304" height="59"/>
+                                <rect key="frame" x="0.0" y="19" width="304" height="48"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RUX-px-nNQ">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="SlX-ET-Ub9"/>
                                             <constraint firstAttribute="width" constant="48" id="eSs-5g-4TR"/>
@@ -89,10 +90,24 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wvb-yu-2KJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="Yh2-cU-Emh"/>
+                                            <constraint firstAttribute="width" constant="48" id="hkc-Vg-j1p"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="handleProfile:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LS9-wp-utD"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="rKV-Ue-JjV" secondAttribute="trailing" id="02A-pi-vOS"/>
+                                    <constraint firstItem="Wvb-yu-2KJ" firstAttribute="leading" secondItem="RUX-px-nNQ" secondAttribute="leading" id="2VH-Qp-tiP"/>
                                     <constraint firstItem="9UI-bX-aMB" firstAttribute="top" secondItem="Sch-bu-GOY" secondAttribute="top" id="8Df-zw-dT0"/>
                                     <constraint firstItem="RUX-px-nNQ" firstAttribute="top" secondItem="Sch-bu-GOY" secondAttribute="top" id="CAy-vL-DJg"/>
                                     <constraint firstItem="9UI-bX-aMB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4Yj-s7-0Qd" secondAttribute="trailing" constant="6" id="CgA-N6-dMm"/>
@@ -100,6 +115,7 @@
                                     <constraint firstItem="rKV-Ue-JjV" firstAttribute="top" secondItem="w76-0F-IUf" secondAttribute="bottom" constant="6" id="K9X-5J-tvF"/>
                                     <constraint firstItem="4Yj-s7-0Qd" firstAttribute="centerY" secondItem="9UI-bX-aMB" secondAttribute="centerY" id="NW1-aN-TMK"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rKV-Ue-JjV" secondAttribute="bottom" id="Pa8-r3-6gY"/>
+                                    <constraint firstItem="Wvb-yu-2KJ" firstAttribute="top" secondItem="RUX-px-nNQ" secondAttribute="top" id="Pm9-dO-0gY"/>
                                     <constraint firstItem="4Yj-s7-0Qd" firstAttribute="leading" secondItem="w76-0F-IUf" secondAttribute="trailing" constant="6" id="ddH-hq-X09"/>
                                     <constraint firstItem="rKV-Ue-JjV" firstAttribute="leading" secondItem="RUX-px-nNQ" secondAttribute="trailing" constant="8" id="hAh-Tf-3VH"/>
                                     <constraint firstItem="w76-0F-IUf" firstAttribute="leading" secondItem="RUX-px-nNQ" secondAttribute="trailing" constant="8" id="mF1-eu-GhE"/>
@@ -111,10 +127,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8OS-UU-Hou" userLabel="Actions">
-                                <rect key="frame" x="0.0" y="86" width="304" height="16"/>
+                                <rect key="frame" x="0.0" y="75" width="304" height="27"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weP-hT-bSo">
-                                        <rect key="frame" x="96" y="0.0" width="35" height="16"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weP-hT-bSo">
+                                        <rect key="frame" x="140" y="0.0" width="35" height="27"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                         <state key="normal" image="retweet.png">
@@ -127,22 +143,24 @@
                                             <action selector="handleShare:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mRQ-ZQ-KnM"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7XM-sz-c4V">
-                                        <rect key="frame" x="139" y="0.0" width="32" height="16"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7XM-sz-c4V">
+                                        <rect key="frame" x="183" y="0.0" width="73" height="27"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                         <state key="normal" image="favorite.png">
                                             <color key="titleColor" red="0.53333333329999999" green="0.59999999999999998" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
-                                        <state key="selected" image="favorite_on.png"/>
+                                        <state key="selected" image="favorite_on.png">
+                                            <color key="titleColor" red="1" green="0.67450980392156867" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                         <state key="highlighted" image="favorite_hover.png"/>
                                         <connections>
                                             <action selector="handleFavorite:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fEJ-TM-PFi"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZuC-ek-ev9">
-                                        <rect key="frame" x="56" y="0.0" width="32" height="16"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZuC-ek-ev9">
+                                        <rect key="frame" x="56" y="0.0" width="76" height="27"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                                         <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                                         <state key="normal" image="reply.png">
@@ -214,11 +232,11 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="favorite.png" width="16" height="16"/>
+        <image name="favorite.png" width="57" height="59"/>
         <image name="favorite_hover.png" width="16" height="16"/>
         <image name="favorite_on.png" width="16" height="16"/>
-        <image name="reply.png" width="16" height="16"/>
-        <image name="reply_hover.png" width="16" height="16"/>
+        <image name="reply.png" width="60" height="60"/>
+        <image name="reply_hover.png" width="57" height="59"/>
         <image name="retweet.png" width="19" height="16"/>
         <image name="retweet_hover.png" width="19" height="16"/>
         <image name="retweet_on.png" width="19" height="16"/>

@@ -8,12 +8,12 @@
 
 #import "StoryViewController.h"
 #import "Story.h"
+#import "PersonViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSDate+DateTools.h"
 
 @interface StoryViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *posterView;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIView *authorView;
 @property (weak, nonatomic) IBOutlet UIView *typeView;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
@@ -21,8 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *replyButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
-@property (weak, nonatomic) IBOutlet UILabel *loginLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *storyTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *authorTop;
 
 @end
 
@@ -30,20 +29,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self setEdgesForExtendedLayout:UIRectEdgeAll];
+    
+    // pick the story to show
     Story *source = self.story;
+    
     if (self.story.source != nil) {
         self.typeLabel.text = [NSString stringWithFormat:@"%@ retweeted this %@ ago", self.story.author.name, self.story.date.shortTimeAgoSinceNow];        
         source = [[Story alloc] initWithDictionary:self.story.source];
         [self.typeView setHidden:NO];
-        self.storyTop.constant = 19;
+        self.authorTop.constant = 42;
     } else {
         [self.typeView setHidden:YES];
-        self.storyTop.constant = 0;
+        self.authorTop.constant = 0;
     }
-    [self.posterView setImageWithURL:[NSURL URLWithString:source.author.imageUrl]];
-    self.nameLabel.text = source.author.name;
-    self.loginLabel.text = [NSString stringWithFormat:@"@%@", source.author.login];
+    
+    PersonViewController *pvc = [[PersonViewController alloc] init];
+    pvc.person = source.author;
+    UIView *pvcv = pvc.view;
+    [self.authorView addSubview:pvcv];
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(pvcv);
+    [self.authorView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[pvcv]|" options:0 metrics:nil views:views]];
+    [self.authorView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[pvcv]|" options:0 metrics:nil views:views]];
+    [pvcv setNeedsUpdateConstraints];
+    [pvcv setTranslatesAutoresizingMaskIntoConstraints:NO];
+
     self.textLabel.text = [NSString stringWithFormat:@"%@ ", source.text];
     self.textLabel.preferredMaxLayoutWidth = self.textLabel.frame.size.width;
     self.dateLabel.text = [NSString stringWithFormat:@"%@ ago", source.date.shortTimeAgoSinceNow];
@@ -53,9 +64,9 @@
     [self.favoriteButton setSelected:self.story.favorited];
     [self.shareButton setSelected:self.story.shared];
     
-    self.posterView.layer.cornerRadius = 6.0;
-
+    [self.textLabel sizeToFit];
     self.textLabel.preferredMaxLayoutWidth = self.textLabel.frame.size.width;
+    
 }
 
 - (void)didReceiveMemoryWarning {

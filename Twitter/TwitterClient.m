@@ -67,7 +67,35 @@ NSString * const kTwitterSecret = @"jasylgJXAHSbJhxY80aERfLU5dy9YRgLf8zuBbhwAw4a
             complete(stories, nil);
         } else {
             // TODO: learn how to generate a useful NSError
-            NSLog(@"responseObject is not NSArray");
+            NSLog(@"TwitterClient:timeline request result is not NSArray");
+            complete(nil, nil);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        complete(nil, error);
+    }];
+}
+- (void)mentions:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete {
+    [self GET:@"1.1/statuses/mentions_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            NSArray *stories = [Story storiesWithArray:responseObject];
+            complete(stories, nil);
+        } else {
+            // TODO: learn how to generate a useful NSError
+            NSLog(@"TwitterClient:mentions request result is not NSArray");
+            complete(nil, nil);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        complete(nil, error);
+    }];
+}
+- (void)profile:(NSDictionary *)params complete:(void (^)(NSArray *stories, NSError *error))complete {
+    [self GET:@"1.1/statuses/user_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            NSArray *stories = [Story storiesWithArray:responseObject];
+            complete(stories, nil);
+        } else {
+            // TODO: learn how to generate a useful NSError
+            NSLog(@"TwitterClient:profile request result is not NSArray");
             complete(nil, nil);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

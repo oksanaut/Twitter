@@ -18,7 +18,9 @@ NSString * const UserRemovedNotification = @"UserRemovedNotification";
         self.data = dictionary;
         self.name = dictionary[@"name"];
         self.login = dictionary[@"screen_name"];
-        self.imageUrl = dictionary[@"profile_image_url"];
+        NSString *profileImageUrl = [dictionary[@"profile_image_url"] stringByReplacingOccurrencesOfString:@"_normal" withString:@""];
+        self.imageUrl = profileImageUrl;
+        self.bannerUrl = [dictionary[@"profile_background_image_url"] stringByReplacingOccurrencesOfString:@"_normal" withString:@""];
         self.tagline = dictionary[@"description"];
     }
     return self;

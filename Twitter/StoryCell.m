@@ -24,7 +24,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *storyLabel;
 @property (weak, nonatomic) IBOutlet UIView *cellView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *storyTop;
-
+@property (weak, nonatomic) IBOutlet UIButton *replyButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+- (IBAction)handleReply:(id)sender;
+- (IBAction)handleShare:(id)sender;
+- (IBAction)handleFavorite:(id)sender;
+- (IBAction)handleProfile:(id)sender;
 @end
 
 @implementation StoryCell
@@ -32,12 +38,10 @@
 - (void)awakeFromNib {
     // Initialization code
     self.posterView.layer.cornerRadius = 6.0;
-
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -64,6 +68,7 @@
     [self.favoriteButton setTitle:[NSString stringWithFormat: @" %ld", self.story.favorites] forState:UIControlStateNormal];
     [self.favoriteButton setSelected:self.story.favorited];
     [self.shareButton setSelected:self.story.shared];
+    [self.favoriteButton setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 
@@ -90,5 +95,10 @@
     [self.favoriteButton setTitle:[NSString stringWithFormat: @" %ld", self.story.favorites] forState:UIControlStateNormal];
     [self.favoriteButton setSelected:self.story.favorited];
 }
+
+- (IBAction)handleProfile:(id)sender {
+    [self.delegate storyCell:self onProfile:self.story.author];
+}
+
 
 @end
