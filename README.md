@@ -32,17 +32,17 @@ Time spent: 18
 
 ##Twitter Redux
 
-Time spent: ___
+Time spent: 10
 
 
 ### Features
 
 #### Required
-- [ ] Hamburger menu
-  - [ ] Dragging anywhere in the view should reveal the menu.
-  - [ ] The menu should include links to your profile, the home timeline, and the mentions view.
-  - [ ] The menu can look similar to the LinkedIn menu below or feel free to take liberty with the UI.
-- [ ] Profile page
+- [X] Hamburger menu
+  - [X] Dragging anywhere in the view should reveal the menu.
+  - [X] The menu should include links to your profile, the home timeline, and the mentions view.
+  - [X] The menu can look similar to the LinkedIn menu below or feel free to take liberty with the UI.
+- [X] Profile page
   - [X] Contains the user header view
   - [ ] Contains a section with the users basic stats: # tweets, # following, # followers
 - [X] Home Timeline
@@ -53,7 +53,7 @@ Time spent: ___
 - [ ] Profile page
   - [ ] Implement the paging view for the user description.
   - [ ] As the paging view moves, increase the opacity of the background screen. See the actual Twitter app for this effect
-  - [ ] Pulling down the profile page should blur and resize the header image.
+  - [X] Pulling down the profile page should blur and resize the header image.
 - [ ] Optional: Account switching
   - [ ] Long press on tab bar to bring up Account view with animation
   - [ ] Tap account to switch to
@@ -61,3 +61,4 @@ Time spent: ___
   - [ ] Swipe to delete an account
 
 ### Walkthrough
+![walkthrough](https://raw.githubusercontent.com/oksanaut/Twitter/master/walkthrough4.gif)
